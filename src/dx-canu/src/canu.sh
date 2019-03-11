@@ -103,6 +103,6 @@ main() {
        dx upload --wait --parents --path $DX_PROJECT_CONTEXT_ID:$output_path/canu.sh canu.sh
 
        # run the canu command
-       canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${input_files[@]}
+       canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${input_files_name[@]}
     fi
 }
