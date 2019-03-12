@@ -247,15 +247,21 @@ sub stashFile ($) {
 
     if (isOS() eq "DNANEXUS") {
         print STDERR "stashFile()-- '$pathname' to project '$pr' namespace '$ns' path '$path' name '$name'.\n"   if ($showWork);
-        if (fileExists("$pr:$ns/$path/$name", 1)) {
-            if (runCommandSilently(".", "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
+        print STDERR "$pr:$ns/$path/$name";
+        print STDERR fileExists("$name", 1);
+        if (fileExists("$name", 1)) {
+            print STDERR "here you are";
+            if (runCommandSilently("", "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
                 caExit("failed to remove object store file", undef);
             }
+        }
+        else {
+            print STDERR "here you are not";
         }
 
         #  Try a couple of times to upload the file.  If the UA fails, delay a bit and retry.
         while (($retries > 0) &&
-               (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
+               (runCommandSilently("", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
             $retries--;
             print STDERR "stashFile()-- Failed to stash file '$pathname', wait $delay seconds and try again ($retries times left).\n";
             sleep($delay);
