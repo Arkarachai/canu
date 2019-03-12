@@ -247,9 +247,10 @@ sub stashFile ($) {
 
     if (isOS() eq "DNANEXUS") {
         print STDERR "stashFile()-- '$pathname' to project '$pr' namespace '$ns' path '$path' name '$name'.\n"   if ($showWork);
-
-        if (runCommandSilently(".", "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
-            caExit("failed to remove object store file", undef);
+        if (fileExists("$pr:$ns/$path/$name", 1)) {
+            if (runCommandSilently(".", "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
+                caExit("failed to remove object store file", undef);
+            }
         }
 
         #  Try a couple of times to upload the file.  If the UA fails, delay a bit and retry.
