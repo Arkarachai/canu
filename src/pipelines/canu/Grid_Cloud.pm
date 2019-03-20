@@ -258,8 +258,8 @@ sub stashFile ($) {
         }
 
         #  Try a couple of times to upload the file.  If the UA fails, delay a bit and retry.
-        print STDERR "current dir"
-        print STDERR getcwd
+        print STDERR "current dir";
+        print STDERR getcwd;
         while (($retries > 0) &&
                (runCommandSilently(getcwd, "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
             $retries--;
