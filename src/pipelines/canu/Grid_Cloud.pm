@@ -250,7 +250,7 @@ sub stashFile ($) {
         print STDERR "stashFile()-- '$pathname' to project '$pr' namespace '$ns' path '$path' name '$name'.\n"   if ($showWork);
         print STDERR "$pr:$ns/$path/$name";
         print STDERR fileExists("$name", 1);
-        if (fileExists("$name", 1)) {
+        if (fileExists("/$path/$name", 1)) {
             print STDERR "here you are";
             if (runCommandSilently(getcwd, "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
                 caExit("failed to remove object store file", undef);
