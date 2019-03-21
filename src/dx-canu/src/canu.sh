@@ -79,7 +79,7 @@ fetch_and_run() {
 main() {
     env
 
-    echo "Value of input_files_names '${input_files_name[@]}'"
+    echo "Value of input_files '${input_files[@]}'"
     echo "Value of input_file_types: '${input_type}'"
     echo "Value of output_prefix '${output_prefix}'"
     echo "Value of genome size '${genome_size}'"
@@ -109,12 +109,12 @@ main() {
        dx upload --wait --parents --path $DX_PROJECT_CONTEXT_ID:$output_path/canu.sh canu.sh
 
        # run the canu command
-       declare -A id_array
+       declare -A id_array=()
        for id in "${input_files[@]}"; do 
-         echo $(dx describe $id --json | jq -r .id)
-         id_array+=($(dx describe $id --json | jq -r .id))
+         echo $(echo $id | jq -r .["$dnanexus_link"])
+         id_array+=($(echo $id | jq -r .["$dnanexus_link"]))
        done
-
+       echo "${id_array[@]}"
        canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${id_array[@]}
     fi
 }
