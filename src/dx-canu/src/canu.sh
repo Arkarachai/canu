@@ -112,7 +112,7 @@ main() {
        id_array=()
        for id in "${input_files[@]}"; do 
          echo $(echo $id | jq -r .["$dnanexus_link"])
-         id_array+=($(echo $id | jq -r .["$dnanexus_link"]))
+         id_array+=("${DX_PROJECT_CONTEXT_ID}$(echo $id | jq -r .["$dnanexus_link"])")
        done
        echo "${id_array[@]}"
        canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${id_array[@]}
