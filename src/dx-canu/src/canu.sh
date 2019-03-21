@@ -90,11 +90,11 @@ main() {
 
     initialize_region
 
-    for i in ${!input_files[@]}   
-    do   
-        echo "Downloading ${input_files_name[$i]}"   
-        dx download "${input_files[$i]}"   
-    done
+   # for i in ${!input_files[@]}   
+   # do   
+   #     echo "Downloading ${input_files_name[$i]}"   
+   #     dx download "${input_files[$i]}"   
+   # done
 
     if [ ! -s ${output_prefix}.contigs.fasta ]; then
        # save the command without the inputs
@@ -109,6 +109,12 @@ main() {
        dx upload --wait --parents --path $DX_PROJECT_CONTEXT_ID:$output_path/canu.sh canu.sh
 
        # run the canu command
-       canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${input_files_name[@]}
+       declare -A id_array
+       for id in "${input_files[@]}"; do 
+         echo $(dx describe $id --json | jq -r .id)
+         id_array+=($(dx describe $id --json | jq -r .id))
+       done
+
+       canu executiveMemory=8 executiveThreads=2 objectStore=DNANEXUS objectStoreClient=$dx_command objectStoreClientUA=$ua_command objectStoreNameSpace=$output_path objectStoreProject=$DX_PROJECT_CONTEXT_ID -d . -p ${output_prefix} genomeSize=${genome_size} $parameters ${input_type} ${id_array[@]}
     fi
 }
