@@ -109,7 +109,7 @@ main() {
        dx upload --wait --parents --path $DX_PROJECT_CONTEXT_ID:$output_path/canu.sh canu.sh
 
        # run the canu command
-       declare -A id_array=()
+       id_array=()
        for id in "${input_files[@]}"; do 
          echo $(echo $id | jq -r .["$dnanexus_link"])
          id_array+=($(echo $id | jq -r .["$dnanexus_link"]))
