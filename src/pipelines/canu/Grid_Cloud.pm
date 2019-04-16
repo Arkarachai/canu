@@ -249,14 +249,14 @@ sub stashFile ($) {
     if (isOS() eq "DNANEXUS") {
         print STDERR "stashFile()-- '$pathname' to project '$pr' namespace '$ns' path '$path' name '$name'.\n"   if ($showWork);
         print STDERR "$pr:$ns/$path/$name"; # to be remove
-        print STDERR "ns"; # to be remove
-        print STDERR "$ns"; # to be remove
-        print STDERR "pr"; # to be remove
-        print STDERR "$pr"; # to be remove
-        print STDERR "path"; # to be remove
-        print STDERR "$path"; # to be remove
-        print STDERR "name"; # to be remove
-        print STDERR "$name"; # to be remove
+        print STDERR "ns\n"; # to be remove
+        print STDERR "$ns\n"; # to be remove
+        print STDERR "pr\n"; # to be remove
+        print STDERR "$pr\n"; # to be remove
+        print STDERR "path\n"; # to be remove
+        print STDERR "$path\n"; # to be remove
+        print STDERR "name\n"; # to be remove
+        print STDERR "$name\n"; # to be remove
         #print STDERR fileExists("$name", 1); # to be remove
         if (fileExists("$path/$name", 1)) {
             print STDERR "here you are";  # to be remove
