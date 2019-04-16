@@ -248,10 +248,19 @@ sub stashFile ($) {
 
     if (isOS() eq "DNANEXUS") {
         print STDERR "stashFile()-- '$pathname' to project '$pr' namespace '$ns' path '$path' name '$name'.\n"   if ($showWork);
-        print STDERR "$pr:$ns/$path/$name";
-        print STDERR fileExists("$name", 1);
-        if (fileExists("/$path/$name", 1)) {
-            print STDERR "here you are";
+        print STDERR "$pr:$ns/$path/$name"; # to be remove
+        print STDERR "ns"; # to be remove
+        print STDERR "$ns"; # to be remove
+        print STDERR "pr"; # to be remove
+        print STDERR "$pr"; # to be remove
+        print STDERR "path"; # to be remove
+        print STDERR "$path"; # to be remove
+        print STDERR "name"; # to be remove
+        print STDERR "$name"; # to be remove
+
+        print STDERR fileExists("$name", 1); # to be remove
+        if (fileExists("$ns/$path/$name", 1)) {
+            print STDERR "here you are";  # to be remove
             if (runCommandSilently(getcwd, "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
                 caExit("failed to remove object store file", undef);
             }
