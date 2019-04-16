@@ -258,7 +258,7 @@ sub stashFile ($) {
         print STDERR "name\n"; # to be remove
         print STDERR "$name\n"; # to be remove
         #print STDERR fileExists("$name", 1); # to be remove
-        if (fileExists("$name", 1)) {
+        if (fileExists("$path/$name", 1)) {   
             print STDERR "here you are";  # to be remove
             if (runCommandSilently(getcwd, "$dx rm --recursive \"$pr:$ns/$path/$name\"", 1)) {
                 caExit("failed to remove object store file", undef);
@@ -269,7 +269,8 @@ sub stashFile ($) {
         print STDERR "current dir";
         print STDERR getcwd;
         while (($retries > 0) &&
-               (runCommandSilently(getcwd, "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
+               #(runCommandSilently(getcwd, "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
+               (runCommandSilently(getcwd, "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/"getcwd --name \"$name\" \"$pathname\"", 0))) { 
             $retries--;
             print STDERR "stashFile()-- Failed to stash file '$pathname', wait $delay seconds and try again ($retries times left).\n";
             sleep($delay);
