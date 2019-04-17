@@ -35,6 +35,7 @@ package canu::Grid_Cloud;
 #  used in shell scripts (rooted where the shell script is run from).
 
 require Exporter;
+require File::Spec;
 
 @ISA    = qw(Exporter);
 @EXPORT = qw(configureCloud
@@ -244,14 +245,7 @@ sub stashFile ($) {
 
     my $retries  = 5;    #  Try a few times to upload the file.   (also set in stashFileShellCode())
     my $delay    = 10;   #  Wait a little bit before retrying.
-    if ("$path" == '.'){
-        print STDERR "i am up\n"; # to be remove
-        $folderlocation = "$ns/";
-    }else{
-        print STDERR "i am down\n"; # to be remove
-        $folderlocation = "$ns/$path/";
-    }
-        print STDERR "folderlocation\n"; # to be remove
+    
     return   if (! -e $pathname);
 
     if (isOS() eq "DNANEXUS") {
@@ -283,7 +277,8 @@ sub stashFile ($) {
 
 
         while (($retries > 0) &&
-            (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$folderlocation\" --name \"$name\" \"$pathname\"", 0))) { 
+            my $folderPath = File::Spec->canonpath("$ns/$path/");
+            (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$folderPath\" --name \"$name\" \"$pathname\"", 0))) { 
             print STDERR "inside retry \n"; # to be remove               
             $retries--;
             print STDERR "stashFile()-- Failed to stash file '$pathname', wait $delay seconds and try again ($retries times left).\n";
