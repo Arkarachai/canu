@@ -268,17 +268,18 @@ sub stashFile ($) {
         #  Try a couple of times to upload the file.  If the UA fails, delay a bit and retry.
         print STDERR "current dir";
         print STDERR getcwd;
+
+        print STDERR "$ns getcwd \n"; # to be remove
+        print STDERR "$pathname \n"; # to be remove
         while (($retries > 0) &&
-               #(runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
+               (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
                print STDERR "inside retry \n"; # to be remove
-               print STDERR "$ns getcwd \n"; # to be remove
-               print STDERR "$pathname \n"; # to be remove
 
                #if ("$path" == '.'){
                #    (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/\" --name \"$name\" \"$pathname\"", 0)))
                #}else{
-                   (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0)));  
-               #}
+               #(runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0)));  
+               
             $retries--;
             print STDERR "stashFile()-- Failed to stash file '$pathname', wait $delay seconds and try again ($retries times left).\n";
             sleep($delay);
