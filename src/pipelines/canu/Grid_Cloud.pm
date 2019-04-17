@@ -241,11 +241,11 @@ sub stashFile ($) {
     my $ua       = getGlobal("objectStoreClientUA");
     my $ns       = getGlobal("objectStoreNameSpace");
     my $pr       = getGlobal("objectStoreProject");
-    my $folderlocation = "";
 
     my $retries  = 5;    #  Try a few times to upload the file.   (also set in stashFileShellCode())
     my $delay    = 10;   #  Wait a little bit before retrying.
-    
+    my $folderPath = File::Spec->canonpath("$ns/$path/");
+
     return   if (! -e $pathname);
 
     if (isOS() eq "DNANEXUS") {
@@ -277,7 +277,6 @@ sub stashFile ($) {
 
 
         while (($retries > 0) &&
-            my $folderPath = File::Spec->canonpath("$ns/$path/");
             (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$folderPath\" --name \"$name\" \"$pathname\"", 0))) { 
             print STDERR "inside retry \n"; # to be remove               
             $retries--;
