@@ -272,9 +272,9 @@ sub stashFile ($) {
         print STDERR "$ns getcwd \n"; # to be remove
         print STDERR "$pathname \n"; # to be remove
         if ("$path" == '.'){
-            my $folder_location = "$ns/"
+            my $folder_location = "$ns/";
         }else{
-            my $folder_location = "$ns/$path/"
+            my $folder_location = "$ns/$path/";
         }
         while (($retries > 0) &&
             (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$folder_location\" --name \"$name\" \"$pathname\"", 0))) { 
