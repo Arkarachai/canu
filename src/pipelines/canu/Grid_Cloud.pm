@@ -269,6 +269,7 @@ sub stashFile ($) {
         print STDERR "current dir";
         print STDERR getcwd;
 
+        
         print STDERR "$ns getcwd \n"; # to be remove
         print STDERR "$pathname \n"; # to be remove
         if ("$path" == '.'){
@@ -291,6 +292,7 @@ sub stashFile ($) {
         if ($retries == 0) {
             caExit("failed to upload file '$pathname' to object store '$pr:$ns/$path/$name'", undef);
         }
+    }
     }
 }
 
