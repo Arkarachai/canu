@@ -272,7 +272,7 @@ sub stashFile ($) {
                #(runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
                print STDERR "$ns getcwd \n"; # to be remove
                print STDERR "$pathname \n"; # to be remove
-               if ($path == '.'){
+               if ("$path" == '.'){
                    (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/\" --name \"$name\" \"$pathname\"", 0)))
                }else{
                    (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0)))  
