@@ -293,7 +293,6 @@ sub stashFile ($) {
             caExit("failed to upload file '$pathname' to object store '$pr:$ns/$path/$name'", undef);
         }
     }
-    }
 }
 
 
