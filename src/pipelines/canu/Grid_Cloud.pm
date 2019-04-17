@@ -243,7 +243,14 @@ sub stashFile ($) {
 
     my $retries  = 5;    #  Try a few times to upload the file.   (also set in stashFileShellCode())
     my $delay    = 10;   #  Wait a little bit before retrying.
-
+    if ("$path" == '.'){
+        print STDERR "i am up\n"; # to be remove
+        my $folderlocation = "$ns/";
+    }else{
+        print STDERR "i am down\n"; # to be remove
+        my $folderlocation = "$ns/$path/";
+    }
+        print STDERR "folderlocation\n"; # to be remove
     return   if (! -e $pathname);
 
     if (isOS() eq "DNANEXUS") {
@@ -272,14 +279,7 @@ sub stashFile ($) {
         
         print STDERR "$ns getcwd \n"; # to be remove
         print STDERR "$pathname \n"; # to be remove
-        if ("$path" == '.'){
-            print STDERR "i am up\n"; # to be remove
-            my $folderlocation = "$ns/";
-        }else{
-            print STDERR "i am down\n"; # to be remove
-            my $folderlocation = "$ns/$path/";
-        }
-        print STDERR "folderlocation\n"; # to be remove
+
 
         while (($retries > 0) &&
             (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$folderlocation\" --name \"$name\" \"$pathname\"", 0))) { 
