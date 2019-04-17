@@ -272,7 +272,11 @@ sub stashFile ($) {
                #(runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0))) { 
                print STDERR "$ns getcwd \n"; # to be remove
                print STDERR "$pathname \n"; # to be remove
-               (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/\"getcwd --name \"$name\" \"$pathname\"", 0))) { 
+               if ($path == '.'){
+                   (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/\" --name \"$name\" \"$pathname\"", 0)))
+               }else{
+                   (runCommandSilently(".", "$ua --do-not-compress --wait-on-close --project \"$pr\" --folder \"$ns/$path/\" --name \"$name\" \"$pathname\"", 0)))  
+               }
             $retries--;
             print STDERR "stashFile()-- Failed to stash file '$pathname', wait $delay seconds and try again ($retries times left).\n";
             sleep($delay);
