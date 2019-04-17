@@ -240,15 +240,16 @@ sub stashFile ($) {
     my $ua       = getGlobal("objectStoreClientUA");
     my $ns       = getGlobal("objectStoreNameSpace");
     my $pr       = getGlobal("objectStoreProject");
+    my $folderlocation = "";
 
     my $retries  = 5;    #  Try a few times to upload the file.   (also set in stashFileShellCode())
     my $delay    = 10;   #  Wait a little bit before retrying.
     if ("$path" == '.'){
         print STDERR "i am up\n"; # to be remove
-        my $folderlocation = "$ns/";
+        $folderlocation = "$ns/";
     }else{
         print STDERR "i am down\n"; # to be remove
-        my $folderlocation = "$ns/$path/";
+        $folderlocation = "$ns/$path/";
     }
         print STDERR "folderlocation\n"; # to be remove
     return   if (! -e $pathname);
