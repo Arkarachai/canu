@@ -252,7 +252,7 @@ fetchFromObjectStore(char *requested) {
 
   char *args[8];
 
-  args[0] = "da";  //  technically should be the last component of 'da'
+  args[0] = "dx";  //  technically should be the last component of 'dx'
   args[1] = "download";
   args[2] = "--overwrite";
   args[3] = "--no-progress";
@@ -290,7 +290,7 @@ fetchFromObjectStore(char *requested) {
 
   if ((WIFEXITED(err)) &&
       (WEXITSTATUS(err) == 127))
-    fprintf(stderr, "fetchFromObjectStore()-- failed to execve() 'da'.\n"), exit(1);
+    fprintf(stderr, "fetchFromObjectStore()-- failed to execve() 'dx'.\n"), exit(1);
 
   //  Make sure that we actually grabbed the file.  If not, BOOM!
 
