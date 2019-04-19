@@ -246,7 +246,7 @@ fetchFromObjectStore(char *requested) {
 
   //  Then report what's going on.
 
-  fprintf(stderr, "fetchFromObjectStore()-- fetching '%s' from '%s'\n", requested, object);
+  fprintf(stderr, "CHAI fetchFromObjectStore()-- fetching '%s' from '%s'\n", requested, object);
 
   //  Build up a command we can execute after forking.
 
