@@ -253,8 +253,8 @@ fetchFromObjectStore(char *requested) {
   char *args[8];
 
     args[0] = "dx";  //  technically should be the last component of 'dx'
-    args[1] = "help"
-    args[2] = "all"
+    args[1] = "help";
+    args[2] = "all";
 //  args[0] = "download";
 //  args[1] = "--overwrite";
 //  args[2] = "--no-progress";
