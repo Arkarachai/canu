@@ -278,6 +278,9 @@ fetchFromObjectStore(char *requested) {
   //  left intact.
 
   if (pid == 0) {
+    fprintf(stderr, "CHAI da = '%s'\n", da);
+    fprintf(stderr, "CHAI args[0] = '%s'\n", args[0]);
+    fprintf(stderr, "CHAI args[1] = '%s'\n", args[1]);
     execve(da, args, environ);
     fprintf(stderr, "fetchFromObjectStore()-- execve() failed with error '%s'.\n", strerror(errno));
     _exit(127);
