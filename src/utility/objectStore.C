@@ -252,16 +252,14 @@ fetchFromObjectStore(char *requested) {
 
   char *args[8];
 
-    args[0] = "lalala";  //  technically should be the last component of 'dx'
-    args[1] = "help";
-    args[2] = "all";
-//  args[0] = "download";
-//  args[1] = "--overwrite";
-//  args[2] = "--no-progress";
-//  args[3] = "--output";
-//  args[4] = requested;
-//  args[5] = object;
- // args[6] = NULL;
+  args[0] = "dx";  //  technically should be the last component of 'dx'
+  args[0] = "download";
+  args[1] = "--overwrite";
+  args[2] = "--no-progress";
+  args[3] = "--output";
+  args[4] = requested;
+  args[5] = object;
+  args[6] = NULL;
 
   //  Fork, run the command or wait for the command to finish.
 
